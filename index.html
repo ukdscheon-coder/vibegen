@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VibeGen — Build Any App in One Sentence</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            indigo: { 50:'#eef2ff', 100:'#e0e7ff', 200:'#c7d2fe', 500:'#6366f1', 600:'#4f46e5', 700:'#4338ca' },
+          },
+          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .pulse-dot { animation: pulse-anim 2s infinite; }
+    @keyframes pulse-anim { 0%,100%{opacity:1} 50%{opacity:.3} }
+    ::-webkit-scrollbar { width:6px; height:6px; }
+    ::-webkit-scrollbar-track { background:#f1f5f9; }
+    ::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:3px; }
+    .spin { animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .fade-in { animation: fadeIn .4s ease-out; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .gradient-text { background: linear-gradient(135deg, #6366f1, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-gradient { background: radial-gradient(ellipse at top, #eef2ff 0%, #f9fafb 60%); }
+    .cta-gradient { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
+    .tab-active { border-bottom: 2px solid #4f46e5; color: #4f46e5; font-weight: 600; }
+    .tab-inactive { border-bottom: 2px solid transparent; color: #6b7280; }
+    .tab-inactive:hover { color: #374151; }
+    code, pre, .mono { font-family: 'SF Mono', 'Fira Code', 'Fira Mono', monospace; }
+    #preview-frame { border: none; width: 100%; height: 100%; background: white; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+<!-- ════════════════════════════════════════════
+     LANDING PAGE
+════════════════════════════════════════════ -->
+<div id="page-landing">
+
+  <!-- Sticky Nav -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center shadow-sm">
+          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+        </div>
+        <span class="font-bold text-base tracking-tight">VibeGen</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/YOUR_USERNAME/vibegen" target="_blank"
+           class="hidden sm:flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition px-3 py-1.5 rounded-lg hover:bg-gray-100">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <button onclick="showBuilder()" class="bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition shadow-sm">
+          Start Building →
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-gradient pt-36 pb-24 px-5">
+    <div class="max-w-4xl mx-auto text-center">
+
+      <div class="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 text-indigo-700 px-3.5 py-1.5 rounded-full text-xs font-semibold mb-8 uppercase tracking-wider">
+        <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full pulse-dot"></span>
+        Free · Open Source · No Lock-in
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-black text-gray-900 leading-tight mb-6 tracking-tight">
+        Build any web app<br>
+        <span class="gradient-text">in one sentence</span>
+      </h1>
+
+      <p class="text-xl md:text-2xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+        Describe it. AI builds it. <strong class="text-gray-700">You own the code.</strong><br>
+        No subscriptions. No credit drain. No vendor lock-in.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 justify-center mb-14">
+        <button onclick="showBuilder()"
+          class="cta-gradient text-white px-8 py-4 rounded-xl text-lg font-bold hover:opacity-90 transition shadow-lg shadow-indigo-200">
+          ⚡ Start Building Free
+        </button>
+        <a href="#compare"
+          class="bg-white border border-gray-200 text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold hover:border-gray-300 hover:shadow-sm transition">
+          See How It Works ↓
+        </a>
+      </div>
+
+      <!-- Example chips -->
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-lg p-5 text-left max-w-2xl mx-auto fade-in">
+        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">Click an example to try it:</p>
+        <div class="flex flex-wrap gap-2" id="landing-chips">
+          <button class="example-chip text-sm bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-300 px-3 py-1.5 rounded-lg transition" data-prompt="A todo list app with priority levels (High/Medium/Low), due dates, category filters, and a dark mode toggle">📝 Todo app + dark mode</button>
+          <button class="example-chip text-sm bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-300 px-3 py-1.5 rounded-lg transition" data-prompt="A personal expense tracker with categories, monthly budget limits, and a donut chart showing spending by category">💰 Expense tracker + charts</button>
+          <button class="example-chip text-sm bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-300 px-3 py-1.5 rounded-lg transition" data-prompt="A Pomodoro timer with a task list, work/break sessions, and a daily productivity score">⏰ Pomodoro timer</button>
+          <button class="example-chip text-sm bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-300 px-3 py-1.5 rounded-lg transition" data-prompt="A recipe manager where I can add, search, and filter recipes by ingredients or cuisine type with beautiful card layout">🍳 Recipe manager</button>
+          <button class="example-chip text-sm bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-300 px-3 py-1.5 rounded-lg transition" data-prompt="A habit tracker that shows daily streaks, a weekly heatmap, and motivational messages when you hit milestones">✅ Habit tracker + streaks</button>
+          <button class="example-chip text-sm bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-300 px-3 py-1.5 rounded-lg transition" data-prompt="A beautiful personal portfolio website with hero section, skills grid, project cards with modal popups, and contact form">🎨 Portfolio website</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section class="py-24 px-5 bg-white" id="compare">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold mb-3">Why VibeGen beats the rest</h2>
+        <p class="text-gray-500 text-lg">We fixed every frustration users had with Base44 and other AI builders.</p>
+      </div>
+
+      <!-- Comparison table -->
+      <div class="rounded-2xl border border-gray-200 overflow-hidden shadow-sm mb-16">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gray-50 border-b border-gray-200">
+              <th class="px-6 py-4 text-left font-semibold text-gray-600">Feature</th>
+              <th class="px-6 py-4 text-center font-bold text-indigo-600">
+                <span class="inline-flex items-center gap-1.5">⚡ VibeGen</span>
+              </th>
+              <th class="px-6 py-4 text-center font-semibold text-gray-400">Base44 / Others</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-3.5 font-medium">Pricing model</td>
+              <td class="px-6 py-3.5 text-center"><span class="bg-green-50 text-green-700 px-2.5 py-0.5 rounded-full text-xs font-semibold">Your own API key — pay what you use</span></td>
+              <td class="px-6 py-3.5 text-center text-gray-400 text-xs">$16–$99/mo + credits that expire</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-3.5 font-medium">Code ownership</td>
+              <td class="px-6 py-3.5 text-center text-green-600 font-semibold">✅ Download & own forever</td>
+              <td class="px-6 py-3.5 text-center text-red-400">❌ Platform lock-in</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-3.5 font-medium">Credit drain while debugging</td>
+              <td class="px-6 py-3.5 text-center text-green-600 font-semibold">✅ None</td>
+              <td class="px-6 py-3.5 text-center text-red-400">❌ Eats credits fast</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-3.5 font-medium">Account required</td>
+              <td class="px-6 py-3.5 text-center text-green-600 font-semibold">✅ No signup needed</td>
+              <td class="px-6 py-3.5 text-center text-red-400">❌ Mandatory</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-3.5 font-medium">Open source</td>
+              <td class="px-6 py-3.5 text-center text-green-600 font-semibold">✅ MIT licensed</td>
+              <td class="px-6 py-3.5 text-center text-red-400">❌ Closed source</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-3.5 font-medium">Deploy anywhere</td>
+              <td class="px-6 py-3.5 text-center text-green-600 font-semibold">✅ Static HTML, host anywhere free</td>
+              <td class="px-6 py-3.5 text-center text-red-400">❌ Hosted by them only</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-3.5 font-medium">Security</td>
+              <td class="px-6 py-3.5 text-center text-green-600 font-semibold">✅ Your key, your data</td>
+              <td class="px-6 py-3.5 text-center text-red-400">❌ Critical CVEs exposed user data</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Feature cards -->
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="p-6 rounded-2xl border border-gray-200 hover:border-indigo-200 hover:shadow-md transition group">
+          <div class="text-3xl mb-3 group-hover:scale-110 transition">🔑</div>
+          <h3 class="font-bold text-lg mb-2">Bring Your Own Key</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Use your Claude or OpenAI API key. Pay Anthropic/OpenAI directly — no markups, no monthly subscriptions, no credits.</p>
+        </div>
+        <div class="p-6 rounded-2xl border border-gray-200 hover:border-indigo-200 hover:shadow-md transition group">
+          <div class="text-3xl mb-3 group-hover:scale-110 transition">📦</div>
+          <h3 class="font-bold text-lg mb-2">Own Your Code</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Every app is a single HTML file. Download it, host it on GitHub Pages, Netlify, or Cloudflare — free, forever.</p>
+        </div>
+        <div class="p-6 rounded-2xl border border-gray-200 hover:border-indigo-200 hover:shadow-md transition group">
+          <div class="text-3xl mb-3 group-hover:scale-110 transition">⚡</div>
+          <h3 class="font-bold text-lg mb-2">Instant Preview</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">See your app live in the browser within seconds. Iterate with follow-up prompts until it's exactly right.</p>
+        </div>
+        <div class="p-6 rounded-2xl border border-gray-200 hover:border-indigo-200 hover:shadow-md transition group">
+          <div class="text-3xl mb-3 group-hover:scale-110 transition">🔓</div>
+          <h3 class="font-bold text-lg mb-2">Zero Lock-in</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">The output is plain HTML+CSS+JS. No proprietary runtime. No database lock-in. Pure web standards.</p>
+        </div>
+        <div class="p-6 rounded-2xl border border-gray-200 hover:border-indigo-200 hover:shadow-md transition group">
+          <div class="text-3xl mb-3 group-hover:scale-110 transition">🌍</div>
+          <h3 class="font-bold text-lg mb-2">Open Source</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Fully auditable and self-hostable. MIT licensed. Fork it, extend it, run your own instance.</p>
+        </div>
+        <div class="p-6 rounded-2xl border border-gray-200 hover:border-indigo-200 hover:shadow-md transition group">
+          <div class="text-3xl mb-3 group-hover:scale-110 transition">🔄</div>
+          <h3 class="font-bold text-lg mb-2">Iterative Editing</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Not happy? Describe changes in plain English and the AI rewrites exactly what you ask. No re-generating from scratch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA banner -->
+  <section class="cta-gradient py-20 px-5 text-center">
+    <div class="max-w-xl mx-auto">
+      <h2 class="text-3xl font-bold text-white mb-3">Ready to build something?</h2>
+      <p class="text-indigo-200 mb-8 text-lg">No account. No credit card. Just describe your app.</p>
+      <button onclick="showBuilder()"
+        class="bg-white text-indigo-700 font-bold px-8 py-4 rounded-xl text-lg hover:bg-indigo-50 transition shadow-xl">
+        ⚡ Start Building Free
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-500 py-8 px-5 text-center text-sm">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center justify-center gap-2 mb-3">
+        <div class="w-5 h-5 rounded bg-indigo-600 flex items-center justify-center">
+          <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+        </div>
+        <span class="font-semibold text-gray-300">VibeGen</span>
+      </div>
+      <p>Open source. MIT licensed. <a href="https://github.com/YOUR_USERNAME/vibegen" class="text-indigo-400 hover:text-indigo-300 transition">⭐ Star on GitHub</a></p>
+      <p class="mt-1 text-gray-600 text-xs">Not affiliated with Base44 or Wix.</p>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     BUILDER PAGE
+════════════════════════════════════════════ -->
+<div id="page-builder" class="hidden fixed inset-0 bg-gray-100 flex flex-col" style="height:100dvh">
+
+  <!-- Top bar -->
+  <header class="bg-white border-b border-gray-200 px-4 h-12 flex items-center justify-between flex-shrink-0 z-10">
+    <div class="flex items-center gap-3">
+      <button onclick="showLanding()" class="flex items-center gap-1 text-gray-400 hover:text-gray-700 text-sm transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <span class="text-gray-200">|</span>
+      <div class="flex items-center gap-1.5">
+        <div class="w-5 h-5 rounded bg-indigo-600 flex items-center justify-center">
+          <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+        </div>
+        <span class="font-bold text-sm">VibeGen</span>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button onclick="toggleKeyPanel()"
+        class="flex items-center gap-1.5 text-xs border border-gray-200 px-3 py-1.5 rounded-lg text-gray-500 hover:text-gray-700 hover:border-gray-300 transition">
+        🔑 <span id="key-status-label">Set API Key</span>
+      </button>
+      <button onclick="resetBuilder()"
+        class="text-xs border border-gray-200 px-3 py-1.5 rounded-lg text-gray-500 hover:text-gray-700 hover:border-gray-300 transition">
+        New App
+      </button>
+      <button id="btn-download" onclick="downloadApp()"
+        class="hidden bg-indigo-600 text-white text-xs font-semibold px-4 py-1.5 rounded-lg hover:bg-indigo-700 transition">
+        ↓ Download HTML
+      </button>
+    </div>
+  </header>
+
+  <!-- API Key panel -->
+  <div id="key-panel" class="hidden bg-amber-50 border-b border-amber-200 px-4 py-3 flex-shrink-0">
+    <div class="max-w-lg mx-auto flex items-center gap-3">
+      <div class="flex-1">
+        <label class="block text-xs font-semibold text-amber-800 mb-1">
+          Claude API Key — stored only in your browser, never sent to our servers
+        </label>
+        <input type="password" id="key-input"
+          placeholder="sk-ant-api03-..."
+          class="w-full border border-amber-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
+          oninput="onKeyInput(this.value)" />
+      </div>
+      <a href="https://console.anthropic.com/settings/keys" target="_blank"
+        class="text-xs text-amber-700 underline hover:no-underline whitespace-nowrap">Get key ↗</a>
+    </div>
+  </div>
+
+  <!-- Main layout -->
+  <div class="flex-1 flex overflow-hidden min-h-0">
+
+    <!-- ── LEFT: Prompt sidebar ── -->
+    <aside class="w-72 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
+      <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+
+        <!-- Prompt -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Describe your app</label>
+          <textarea id="prompt-input"
+            placeholder="e.g. A todo list with priority levels, due dates, search, and dark mode..."
+            class="border border-gray-200 rounded-xl p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            rows="6"></textarea>
+        </div>
+
+        <!-- Examples -->
+        <div class="flex flex-col gap-1.5">
+          <span class="text-xs text-gray-400 font-medium">Quick start:</span>
+          <button onclick="usePrompt('A beautiful todo list app with High/Medium/Low priorities, due dates, tag filters, search, and a dark mode toggle')"
+            class="text-left text-xs bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-200 rounded-lg px-3 py-2.5 transition leading-snug">
+            📝 Todo list with priorities & dark mode
+          </button>
+          <button onclick="usePrompt('A personal budget tracker: add income/expenses with categories, monthly bar chart, and budget limit warnings')"
+            class="text-left text-xs bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-200 rounded-lg px-3 py-2.5 transition leading-snug">
+            💰 Budget tracker with charts
+          </button>
+          <button onclick="usePrompt('A Pomodoro productivity timer: 25/5 min cycles, custom task list, session count, and a circular progress ring')"
+            class="text-left text-xs bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-200 rounded-lg px-3 py-2.5 transition leading-snug">
+            ⏰ Pomodoro timer
+          </button>
+          <button onclick="usePrompt('A recipe book app: add recipes with ingredients, steps, cuisine type, search and filter cards, serving size adjuster')"
+            class="text-left text-xs bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-200 rounded-lg px-3 py-2.5 transition leading-snug">
+            🍳 Recipe manager
+          </button>
+          <button onclick="usePrompt('A daily habit tracker: track up to 10 habits, show streak count, weekly heatmap grid, and level-up milestone rewards')"
+            class="text-left text-xs bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-200 rounded-lg px-3 py-2.5 transition leading-snug">
+            ✅ Habit tracker + streaks
+          </button>
+        </div>
+
+        <!-- Model -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">AI Model</label>
+          <select id="model-select" class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+            <option value="claude-opus-4-8">Claude Opus 4 — Best quality</option>
+            <option value="claude-sonnet-5">Claude Sonnet 5 — Faster</option>
+            <option value="claude-haiku-4-5-20251001">Claude Haiku 4.5 — Cheapest</option>
+          </select>
+        </div>
+
+        <!-- Generate button -->
+        <button id="btn-generate" onclick="generateApp()"
+          class="w-full cta-gradient text-white py-3 rounded-xl font-bold text-sm hover:opacity-90 transition shadow-sm">
+          ⚡ Generate App
+        </button>
+
+        <!-- Iterate section (appears after first gen) -->
+        <div id="section-iterate" class="hidden border-t border-gray-100 pt-4 flex flex-col gap-1.5">
+          <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Modify / Improve</label>
+          <textarea id="iterate-input"
+            placeholder="e.g. Make the header taller, add export to CSV button, change colors to green..."
+            class="border border-gray-200 rounded-lg p-2.5 text-xs resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            rows="3"></textarea>
+          <button onclick="iterateApp()"
+            class="w-full bg-purple-600 text-white py-2.5 rounded-lg font-semibold text-xs hover:bg-purple-700 transition">
+            🔄 Update App
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── RIGHT: Output pane ── -->
+    <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+      <!-- Tab bar -->
+      <div class="bg-white border-b border-gray-200 px-4 flex items-center gap-0 flex-shrink-0">
+        <button id="tab-btn-preview" onclick="switchTab('preview')"
+          class="px-4 py-3 text-sm transition tab-active">
+          Preview
+        </button>
+        <button id="tab-btn-code" onclick="switchTab('code')"
+          class="px-4 py-3 text-sm transition tab-inactive">
+          Code
+        </button>
+        <div class="ml-auto flex items-center gap-2 py-2">
+          <button id="btn-copy" onclick="copyCode()"
+            class="hidden text-xs border border-gray-200 px-3 py-1.5 rounded-lg text-gray-500 hover:text-gray-700 hover:border-gray-300 transition">
+            📋 Copy
+          </button>
+        </div>
+      </div>
+
+      <!-- Output area -->
+      <div class="flex-1 relative overflow-hidden">
+
+        <!-- Empty state -->
+        <div id="state-empty" class="absolute inset-0 flex items-center justify-center text-center">
+          <div>
+            <div class="text-6xl mb-4">⚡</div>
+            <h3 class="text-xl font-bold text-gray-700 mb-2">Ready to forge</h3>
+            <p class="text-gray-400 text-sm max-w-xs mx-auto">Set your Claude API key, describe what you want to build, and hit Generate.</p>
+          </div>
+        </div>
+
+        <!-- Loading state -->
+        <div id="state-loading" class="hidden absolute inset-0 flex items-center justify-center">
+          <div class="text-center">
+            <div class="relative w-14 h-14 mx-auto mb-6">
+              <div class="absolute inset-0 rounded-full border-4 border-indigo-100"></div>
+              <div class="absolute inset-0 rounded-full border-4 border-t-indigo-600 spin"></div>
+            </div>
+            <p id="loading-title" class="text-gray-800 font-semibold">Generating your app…</p>
+            <p id="loading-sub" class="text-gray-400 text-sm mt-1">AI is crafting your code</p>
+          </div>
+        </div>
+
+        <!-- Preview iframe -->
+        <div id="pane-preview" class="hidden absolute inset-0">
+          <iframe id="preview-frame"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-modals"
+            class="w-full h-full border-0 bg-white"></iframe>
+        </div>
+
+        <!-- Code viewer -->
+        <div id="pane-code" class="hidden absolute inset-0 overflow-auto bg-gray-950 p-5">
+          <pre id="code-display" class="text-green-300 text-xs leading-relaxed mono whitespace-pre-wrap break-words"></pre>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+// ─── State ───────────────────────────────────
+let generatedCode   = '';
+let currentTab      = 'preview';
+let history         = [];   // Claude conversation history for iteration
+
+// ─── API Key ─────────────────────────────────
+function loadKey() {
+  const k = localStorage.getItem('af_key') || '';
+  const inp = document.getElementById('key-input');
+  if (inp) inp.value = k;
+  refreshKeyLabel(k);
+  return k;
+}
+function onKeyInput(v) {
+  localStorage.setItem('af_key', v.trim());
+  refreshKeyLabel(v.trim());
+}
+function refreshKeyLabel(k) {
+  const el = document.getElementById('key-status-label');
+  if (el) el.textContent = k ? '🔑 Key saved ✓' : 'Set API Key';
+}
+function toggleKeyPanel() {
+  const p = document.getElementById('key-panel');
+  p.classList.toggle('hidden');
+  if (!p.classList.contains('hidden')) document.getElementById('key-input').focus();
+}
+
+// ─── Navigation ──────────────────────────────
+function showBuilder() {
+  document.getElementById('page-landing').classList.add('hidden');
+  document.getElementById('page-builder').classList.remove('hidden');
+  loadKey();
+  if (!localStorage.getItem('af_key')) {
+    document.getElementById('key-panel').classList.remove('hidden');
+  }
+}
+function showLanding() {
+  document.getElementById('page-landing').classList.remove('hidden');
+  document.getElementById('page-builder').classList.add('hidden');
+}
+function usePrompt(text) {
+  document.getElementById('prompt-input').value = text;
+}
+function resetBuilder() {
+  generatedCode = '';
+  history = [];
+  document.getElementById('prompt-input').value = '';
+  document.getElementById('iterate-input').value = '';
+  showState('empty');
+  document.getElementById('btn-download').classList.add('hidden');
+  document.getElementById('btn-copy').classList.add('hidden');
+  document.getElementById('section-iterate').classList.add('hidden');
+}
+
+// ─── Tabs ─────────────────────────────────────
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('tab-btn-preview').className = 'px-4 py-3 text-sm transition ' + (tab==='preview' ? 'tab-active' : 'tab-inactive');
+  document.getElementById('tab-btn-code').className    = 'px-4 py-3 text-sm transition ' + (tab==='code'    ? 'tab-active' : 'tab-inactive');
+  if (generatedCode) {
+    document.getElementById('pane-preview').classList.toggle('hidden', tab !== 'preview');
+    document.getElementById('pane-code').classList.toggle('hidden',    tab !== 'code');
+  }
+}
+
+// ─── State helpers ───────────────────────────
+function showState(s) {
+  ['empty','loading'].forEach(id => {
+    document.getElementById('state-' + id).classList.toggle('hidden', id !== s);
+  });
+  document.getElementById('pane-preview').classList.add('hidden');
+  document.getElementById('pane-code').classList.add('hidden');
+}
+function showResult() {
+  document.getElementById('state-empty').classList.add('hidden');
+  document.getElementById('state-loading').classList.add('hidden');
+  document.getElementById('pane-preview').classList.toggle('hidden', currentTab !== 'preview');
+  document.getElementById('pane-code').classList.toggle('hidden',    currentTab !== 'code');
+  document.getElementById('btn-download').classList.remove('hidden');
+  document.getElementById('btn-copy').classList.remove('hidden');
+  document.getElementById('section-iterate').classList.remove('hidden');
+}
+
+// ─── Generate ────────────────────────────────
+async function generateApp() {
+  const prompt = document.getElementById('prompt-input').value.trim();
+  if (!prompt) { alert('Please describe your app first!'); return; }
+  const key = localStorage.getItem('af_key') || '';
+  if (!key) {
+    document.getElementById('key-panel').classList.remove('hidden');
+    document.getElementById('key-input').focus();
+    return;
+  }
+  history = [{ role: 'user', content: prompt }];
+  await callClaude(key);
+}
+
+async function iterateApp() {
+  const change = document.getElementById('iterate-input').value.trim();
+  if (!change || !generatedCode) return;
+  const key = localStorage.getItem('af_key') || '';
+  if (!key) { toggleKeyPanel(); return; }
+  history.push({ role: 'assistant', content: generatedCode });
+  history.push({ role: 'user', content: `Modify the app: ${change}\n\nReturn the complete updated HTML file only.` });
+  document.getElementById('iterate-input').value = '';
+  await callClaude(key);
+}
+
+// ─── Loading animation ───────────────────────
+const loadingSteps = [
+  ['Planning your app…',    'Thinking about features & layout'],
+  ['Building structure…',   'Writing HTML & components'],
+  ['Styling with CSS…',     'Making it look beautiful'],
+  ['Adding logic…',         'Wiring up JavaScript'],
+  ['Finishing touches…',    'Almost ready!'],
+];
+let loadingTimer = null;
+function startLoadingAnim() {
+  let i = 0;
+  const t = document.getElementById('loading-title');
+  const s = document.getElementById('loading-sub');
+  t.textContent = loadingSteps[0][0];
+  s.textContent = loadingSteps[0][1];
+  loadingTimer = setInterval(() => {
+    i = Math.min(i + 1, loadingSteps.length - 1);
+    t.textContent = loadingSteps[i][0];
+    s.textContent = loadingSteps[i][1];
+  }, 2200);
+}
+function stopLoadingAnim() {
+  clearInterval(loadingTimer);
+}
+
+// ─── Core API call ───────────────────────────
+const SYSTEM = `You are an expert web developer who creates beautiful, fully-functional web applications.
+
+When the user describes an app, generate a COMPLETE, self-contained single HTML file.
+
+RULES:
+1. Output ONLY the HTML — no markdown, no code fences, no explanations.
+2. Start with <!DOCTYPE html> and end with </html>.
+3. Include ALL CSS and JavaScript inline in the file.
+4. Use Tailwind CSS via CDN: <script src="https://cdn.tailwindcss.com"><\/script>
+5. Design must be modern, beautiful, and professional. Use gradients, shadows, transitions.
+6. ALL described features must work correctly.
+7. Use localStorage for data persistence.
+8. Must be fully mobile-responsive.
+9. Include smooth animations and micro-interactions.
+10. Handle empty states gracefully.
+11. Pick a cohesive, attractive color scheme suitable for the app type.`;
+
+async function callClaude(key) {
+  showState('loading');
+  startLoadingAnim();
+
+  const btn = document.getElementById('btn-generate');
+  btn.disabled = true;
+  btn.textContent = '⏳ Generating…';
+
+  const model = document.getElementById('model-select').value;
+
+  try {
+    const res = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model, apiKey: key, messages: history, system: SYSTEM }),
+    });
+
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error?.message || `HTTP ${res.status}`);
+
+    let code = data.content[0].text.trim();
+    // Strip markdown code fences if AI accidentally included them
+    code = code.replace(/^```[\w]*\n?/, '').replace(/\n?```$/, '').trim();
+
+    generatedCode = code;
+    document.getElementById('code-display').textContent = code;
+    document.getElementById('preview-frame').srcdoc = code;
+    showResult();
+
+  } catch (err) {
+    showState('empty');
+    alert('Error: ' + err.message + '\n\nCheck your API key and try again.');
+  } finally {
+    stopLoadingAnim();
+    btn.disabled = false;
+    btn.textContent = '⚡ Generate App';
+  }
+}
+
+// ─── Actions ─────────────────────────────────
+function downloadApp() {
+  if (!generatedCode) return;
+  const slug = (document.getElementById('prompt-input').value || 'app')
+    .toLowerCase().split(/\s+/).slice(0, 4).join('-').replace(/[^a-z0-9-]/g, '');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([generatedCode], { type: 'text/html' }));
+  a.download = (slug || 'vibegen-app') + '.html';
+  a.click();
+}
+function copyCode() {
+  if (!generatedCode) return;
+  navigator.clipboard.writeText(generatedCode).then(() => {
+    const b = document.getElementById('btn-copy');
+    b.textContent = '✅ Copied!';
+    setTimeout(() => b.textContent = '📋 Copy', 2000);
+  });
+}
+
+// ─── Landing chip clicks ──────────────────────
+document.querySelectorAll('.example-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    showBuilder();
+    setTimeout(() => usePrompt(chip.dataset.prompt), 80);
+  });
+});
+
+// ─── Init ────────────────────────────────────
+loadKey();
+</script>
+</body>
+</html>
