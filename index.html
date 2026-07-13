@@ -57,10 +57,14 @@
         <span class="font-bold text-base tracking-tight">VibeGen</span>
       </div>
       <div class="flex items-center gap-3">
-        <a href="https://github.com/ukdcheon-coder/vibegen" target="_blank"
+        <a href="https://github.com/ukdscheon-coder/vibegen" target="_blank"
            class="hidden sm:flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition px-3 py-1.5 rounded-lg hover:bg-gray-100">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           GitHub
+        </a>
+        <a href="https://buy.stripe.com/28EdRa0jp2AF7G82S71sQ00" target="_blank"
+           class="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 border border-indigo-200 bg-indigo-50 px-3.5 py-1.5 rounded-lg hover:bg-indigo-100 transition">
+          ⚡ Go Pro · $9/mo
         </a>
         <button onclick="showBuilder()" class="bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition shadow-sm">
           Start Building →
@@ -210,6 +214,60 @@
     </div>
   </section>
 
+  <!-- Pricing -->
+  <section class="py-24 px-5 bg-gray-50" id="pricing">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold mb-3">Simple, honest pricing</h2>
+        <p class="text-gray-500 text-lg">You pay Anthropic for tokens. We charge nothing on top.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+
+        <!-- Free -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+          <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Free forever</div>
+          <div class="text-4xl font-black text-gray-900 mb-1">$0</div>
+          <div class="text-sm text-gray-400 mb-6">+ Anthropic API costs (your key)</div>
+          <ul class="space-y-3 mb-8 text-sm text-gray-600">
+            <li class="flex items-center gap-2"><span class="text-green-500 font-bold">✓</span> Unlimited app generations</li>
+            <li class="flex items-center gap-2"><span class="text-green-500 font-bold">✓</span> Download HTML, own your code</li>
+            <li class="flex items-center gap-2"><span class="text-green-500 font-bold">✓</span> All 3 Claude models</li>
+            <li class="flex items-center gap-2"><span class="text-green-500 font-bold">✓</span> No account required</li>
+            <li class="flex items-center gap-2"><span class="text-green-500 font-bold">✓</span> Open source (MIT)</li>
+          </ul>
+          <button onclick="showBuilder()"
+            class="w-full border-2 border-indigo-600 text-indigo-600 font-bold py-3 rounded-xl hover:bg-indigo-50 transition">
+            Start Building Free →
+          </button>
+        </div>
+
+        <!-- Pro -->
+        <div class="bg-white rounded-2xl border-2 border-indigo-500 p-8 shadow-lg relative">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+            <span class="bg-indigo-600 text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">Most popular</span>
+          </div>
+          <div class="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-3">Pro</div>
+          <div class="text-4xl font-black text-gray-900 mb-1">$9<span class="text-xl font-normal text-gray-400">/mo</span></div>
+          <div class="text-sm text-gray-400 mb-6">Everything in Free, plus:</div>
+          <ul class="space-y-3 mb-8 text-sm text-gray-600">
+            <li class="flex items-center gap-2"><span class="text-indigo-500 font-bold">✓</span> Priority email support</li>
+            <li class="flex items-center gap-2"><span class="text-indigo-500 font-bold">✓</span> Early access to new features</li>
+            <li class="flex items-center gap-2"><span class="text-indigo-500 font-bold">✓</span> Feature request voting</li>
+            <li class="flex items-center gap-2"><span class="text-indigo-500 font-bold">✓</span> Supporter badge on GitHub</li>
+            <li class="flex items-center gap-2"><span class="text-indigo-500 font-bold">✓</span> Help keep VibeGen free for everyone</li>
+          </ul>
+          <a href="https://buy.stripe.com/28EdRa0jp2AF7G82S71sQ00" target="_blank"
+            class="block w-full text-center cta-gradient text-white font-bold py-3 rounded-xl hover:opacity-90 transition shadow-md shadow-indigo-200">
+            ⚡ Go Pro — $9/month
+          </a>
+          <p class="text-center text-xs text-gray-400 mt-3">Cancel anytime · Secure checkout by Stripe</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- CTA banner -->
   <section class="cta-gradient py-20 px-5 text-center">
     <div class="max-w-xl mx-auto">
@@ -231,8 +289,18 @@
         </div>
         <span class="font-semibold text-gray-300">VibeGen</span>
       </div>
-      <p>Open source. MIT licensed. <a href="https://github.com/ukdcheon-coder/vibegen" class="text-indigo-400 hover:text-indigo-300 transition">⭐ Star on GitHub</a></p>
-      <p class="mt-1 text-gray-600 text-xs">Not affiliated with Base44 or Wix.</p>
+      <p>Open source. MIT licensed. <a href="https://github.com/ukdscheon-coder/vibegen" class="text-indigo-400 hover:text-indigo-300 transition">⭐ Star on GitHub</a></p>
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-3">
+        <a href="https://buy.stripe.com/28EdRa0jp2AF7G82S71sQ00" target="_blank"
+          class="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-4 py-2 rounded-full transition">
+          ⚡ Go Pro · $9/mo
+        </a>
+        <a href="https://ko-fi.com/vibegen" target="_blank"
+          class="inline-flex items-center gap-2 bg-[#FF5E5B] hover:bg-[#ff4642] text-white text-xs font-semibold px-4 py-2 rounded-full transition">
+          ☕ Support on Ko-fi
+        </a>
+      </div>
+      <p class="mt-2 text-gray-600 text-xs">Not affiliated with Base44 or Wix.</p>
     </div>
   </footer>
 </div>
