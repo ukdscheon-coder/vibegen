@@ -26,7 +26,7 @@ git add .
 git commit -m "Initial commit: VibeGen v1.0"
 
 # GitHub에서 새 레포 생성 후:
-git remote add origin https://github.com/ukdcheon-coder/vibegen.git
+git remote add origin https://github.com/ukdscheon-coder/vibegen.git
 git branch -M main
 git push -u origin main
 ```
@@ -105,8 +105,8 @@ npm run dev
 
 ## index.html 안에서 GitHub 링크 업데이트
 
-배포 전 `index.html`에서 `ukdcheon-coder`을 실제 GitHub 계정명으로 교체:
+배포 전 `index.html`에서 `ukdscheon-coder`을 실제 GitHub 계정명으로 교체:
 
 ```
-ukdcheon-coder → ds (또는 원하는 이름)
+ukdscheon-coder → ds (또는 원하는 이름)
 ```
